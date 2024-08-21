@@ -1,0 +1,41 @@
+data:
+  source: "mnist"
+
+prior:
+  input_dim:    2
+  hidden_dim:   250
+  output_dim:   2
+  lr:           0.001
+  epochs:       100
+  batch_size:   124
+  batches:      40
+
+autoencoders:
+  input_dim:    784
+  hidden_dim:   256
+  latent_dim:   2
+  input_shape:  [28, 28, 1]
+  lr:           0.001
+  epochs:       100
+  batch_size:   124
+  batches:      40
+  sae_prob_toggle:  False
+  vae_prob_toggle:  True
+  convolutional:    True
+
+sinkhorn:
+  use_sinkhorn:   False
+  max_iterations: 200
+
+scaling:
+  scale_rn: 1.0
+  scale_sd: 0.01
+  scale_kl: 0.01
+
+plotting:
+  num_plot_samples: 5000
+
+settings:
+  params_path:  "/Users/carlscandelius/Documents/HarvardUndergrad/OTPrior-main/saved_params"
+  config_name:  "2d_cos"
+  metric:       cosine
