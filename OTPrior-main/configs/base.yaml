@@ -36,6 +36,6 @@ plotting:
   num_plot_samples: 5000
 
 settings:
-  params_path:  "/Users/carlscandelius/Documents/HarvardUndergrad/OTPrior-main/saved_params"
+  params_path:  "OTPrior-main/saved_params"
   config_name:  "base"
   metric:       cosine
