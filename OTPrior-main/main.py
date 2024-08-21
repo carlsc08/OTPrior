@@ -1,6 +1,8 @@
 import subprocess
 
 
+# tracking changes
+
 config = 'configs/2d_cosine_mnist.yaml'
 script1 = 'train/prior.py'
 script2 = 'train/ae.py'
