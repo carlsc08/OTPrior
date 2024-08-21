@@ -1,2 +1,2 @@
 # OTPrior
-Learning geometry-aligned autoencoder prior distributions based on Gromov-Wasserstein.
+Learning geometry-aligned autoencoder priors based on Gromov-Wasserstein.
