@@ -126,7 +126,7 @@ if use_sinkhorn:
     model_type = 'sae'
 else:
     model_type = 'vae'
-path = os.path.join(params_path, f'{model_type}_{config_name}_{data_type}_{metric}.npy')
+path = os.path.join("saved_params/", f'{model_type}_{config_name}_{data_type}_{metric}.npy')
 jnp.save(path, state.params)
 print("Model trained and weights saved.")
 plt.figure()

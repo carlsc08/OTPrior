@@ -169,7 +169,7 @@ for epoch in range(epochs):
     losses.append(float(epoch_loss))
     print("Epoch", epoch, "GW loss:", epoch_loss)
 
-path = os.path.join(params_path, f'prior_{config_name}_{data_type}_{metric}.npy')
+path = os.path.join("saved_params/", f'prior_{config_name}_{data_type}_{metric}.npy')
 jnp.save(path, params)
 print("Model trained and weights saved.")
 plt.figure()

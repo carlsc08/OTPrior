@@ -6,7 +6,7 @@ prior:
   hidden_dim:   250
   output_dim:   2
   lr:           0.001
-  epochs:       100
+  epochs:       250
   batch_size:   124
   batches:      40
 
@@ -16,7 +16,7 @@ autoencoders:
   latent_dim:   2
   input_shape:  [28, 28, 1]
   lr:           0.001
-  epochs:       100
+  epochs:       250
   batch_size:   124
   batches:      40
   sae_prob_toggle:  False
