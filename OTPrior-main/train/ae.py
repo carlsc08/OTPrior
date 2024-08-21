@@ -20,7 +20,6 @@ with open(config, 'r') as file:
     config = yaml.safe_load(file)
     
 input_dim, hidden_dim, latent_dim, input_shape, lr, epochs, batch_size, batches, sae_prob_toggle, vae_prob_toggle, conv_toggle = config['autoencoders'].values()
-print(input_shape)
 scale_rn, scale_sd, scale_kl = config['scaling'].values()
 num_plot_samples = config['plotting']['num_plot_samples']
 params_path, config_name, metric = config['settings'].values()
@@ -157,5 +156,5 @@ latent = jnp.concatenate(latent, axis=0)
 plotters.mnist_img_plot(test_data, reconstructed, 10)
 plotters.latent_plot(train_data, train_labels, vae_model, state.params['params'], num_plot_samples, prob_toggle, use_tsne=True)
 if latent_dim == 2:
-    plotters.mnist_interp_euclidean(500, vae_model.decoder, state.params['params']['decoder'])
+    plotters.mnist_interp_euclidean(20, vae_model.decoder, state.params['params']['decoder'])
 plt.show()

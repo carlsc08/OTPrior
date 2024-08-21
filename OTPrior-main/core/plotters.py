@@ -295,7 +295,7 @@ def plot_fitted_map_gromov(
         return fig
 
 def kmeans_plot(prior_samples, num_clusters=10):
-    kmeans = KMeans(n_clusters=num_clusters, random_state=0)
+    kmeans = KMeans(n_clusters=num_clusters, n_init=10, random_state=0)
     cluster_labels = kmeans.fit_predict(prior_samples)
     if prior_samples.shape[1] == 2:
         plt.figure(figsize=(8, 6))
@@ -319,7 +319,7 @@ def kmeans_plot(prior_samples, num_clusters=10):
 def tsne_kmeans_plot(prior_samples, num_clusters=10):
     tsne = TSNE(n_components=2, random_state=0)
     prior_2d = tsne.fit_transform(prior_samples)
-    kmeans = KMeans(n_clusters=num_clusters, random_state=0)
+    kmeans = KMeans(n_clusters=num_clusters, n_init=10, random_state=0)
     cluster_labels = kmeans.fit_predict(prior_samples)
     plt.figure(figsize=(8, 6))
     scatter = plt.scatter(prior_2d[:, 0], prior_2d[:, 1], c=cluster_labels, s=10, cmap='tab10')

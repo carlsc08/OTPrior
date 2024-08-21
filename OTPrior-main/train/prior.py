@@ -17,7 +17,6 @@ import jax.random as jr
 import functools as ft
 import yaml
 
-plt.ion()
 config = sys.argv[1]
 with open(config, 'r') as file:
     config = yaml.safe_load(file)
@@ -177,7 +176,6 @@ plt.plot(losses)
 
 noise_vecs = sampling.noise_matrix(num_plot_samples, jr.PRNGKey(0), input_dim)
 prior_samples = jax.vmap(lambda x: prior_net.apply({'params': params}, x))(noise_vecs)
-print(prior_samples.shape)
 plotters.kmeans_plot(prior_samples)
 plotters.tsne_kmeans_plot(prior_samples)
 plt.show()
