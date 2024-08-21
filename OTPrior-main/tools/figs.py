@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 import models.prior as prior
 
 # prior
-input_dim=3
+input_dim = 3
+hidden_dim = 250
+
 num_samples=10000
-path = '/Users/carlscandelius/Documents/HarvardUndergrad/OTPrior-main/saved_params/prior_base_cosine.npy'
-prior_model = prior.PriorNet(3, 150, 3)
+path = 'saved_params/prior_base_cosine.npy'
+prior_model = prior.PriorNet(input_dim, hidden_dim, input_dim)
 noise_batch = sampling.noise_matrix(num_samples, jr.PRNGKey(0), input_dim)
 prior_samples = sampling.sample_learned_prior(num_samples, jr.PRNGKey(0), path, prior_model, input_dim)
 

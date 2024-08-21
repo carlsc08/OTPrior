@@ -180,8 +180,8 @@ def plot_fitted_map_gromov(
     if num_points is None:
         subsample = jnp.arange(len(batch['source']))
     else:
-        rng = random.PRNGKey(seed)
-        subsample = random.choice(
+        rng = jr.PRNGKey(seed)
+        subsample = jr.choice(
             rng, a=len(batch['source']), shape=(num_points,),
             replace=False
         )
@@ -409,11 +409,3 @@ def mnist_interp_euclidean(side_dim, decoder_model, decoder_params, digit_size =
             decoded_z = decoder_model.apply({'params': decoder_params}, z)
             axes[i, j].imshow(decoded_z, cmap='gray')
             axes[i, j].axis('off')
-
-
-def mnist_interp_geodesic(side_dim, decoder_model, decoder_params, digit_size = 28):
-    """
-    data interpolation examples along geodesic
-    """
-
-    return

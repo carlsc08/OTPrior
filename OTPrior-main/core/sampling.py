@@ -5,7 +5,6 @@ Define data distribution for nn_learning_prior.py
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
 import jax
 import jax.random as jr
 import jax.numpy as jnp
