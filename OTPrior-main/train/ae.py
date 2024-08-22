@@ -59,7 +59,11 @@ def sink_div(source, target, epsilon=None, max_iterations=max_iterations):
     )
     return ot.divergence
 
-def loss_function(params, xs, p_key, rp_keys, prob_toggle=prob_toggle, use_sinkhorn=use_sinkhorn):
+if use_sinkhorn:
+    prior_in, prior_hid, prior_out = config['prior']['input_dim'], config['prior']['hidden_dim'], config['prior']['output_dim'] 
+    prior_model = prior.PriorNet(prior_in, prior_hid, prior_out)
+
+def loss_function(params, xs, p_key, rp_keys, prob_toggle=prob_toggle, use_sinkhorn=use_sinkhorn, prior_model=prior_model):
     if prob_toggle:
         x_hats, mus, log_vars = jax.vmap(lambda x, rp_key: vae_model.apply({'params': params['params']}, x, rp_key, prob_toggle=True))(xs, rp_keys)
         kld = jnp.mean(0.5 * jnp.sum(-1 - log_vars + mus**2 + jnp.exp(log_vars)))
@@ -98,10 +102,6 @@ def batch_generator(images):
     for i in range(batches):
         batch_indices = indices[i * batch_size:(i + 1) * batch_size]
         yield images[batch_indices]
-
-if use_sinkhorn:
-    prior_in, prior_hid, prior_out = config['prior']['input_dim'], config['prior']['hidden_dim'], config['prior']['output_dim'] 
-    prior_model = prior.PriorNet(prior_in, prior_hid, prior_out)
 
 state = create_train_state(vae_model, key=jr.PRNGKey(0))
 losses = []
@@ -144,7 +144,7 @@ if prob_toggle:
         latent.append(mus)
 else:
     for xs in test_gen:
-        x_hats, zs = jax.vmap(lambda x: vae_model.apply({'params': state.params['params']}, x, jr.PRNGKey(0), prob_toggle=False))(xs)
+        x_hats, zs = jax.vmap(lambda x: vae_model.apply({'params': state.params['params']}, x, jr.PRNGKey(0), prob_toggle=False, test=True))(xs)
         test_recon_loss += jnp.mean(jnp.square(xs - x_hats))
         reconstructed.append(x_hats)
         latent.append(zs)

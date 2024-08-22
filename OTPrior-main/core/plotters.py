@@ -332,9 +332,9 @@ def latent_plot(data, labels, model, params, num_samples, prob_toggle=False, use
     sampled_data = data[:num_samples]
     sampled_labels = labels[:num_samples]
     if prob_toggle:
-        _, _, latent_representations = jax.vmap(lambda x: model.apply({'params': params}, x, jr.PRNGKey(0), prob_toggle))(sampled_data)
+        _, latent_representations, _ = jax.vmap(lambda x: model.apply({'params': params}, x, jr.PRNGKey(0), prob_toggle=True, test=True))(sampled_data)
     else:
-        _, latent_representations = jax.vmap(lambda x: model.apply({'params': params}, x, jr.PRNGKey(0), prob_toggle))(sampled_data)
+        _, latent_representations = jax.vmap(lambda x: model.apply({'params': params}, x, jr.PRNGKey(0), prob_toggle=False, test=True))(sampled_data)
     latent_dim = latent_representations.shape[-1]
     if latent_dim == 2:
         plt.figure(figsize=(8, 6))
@@ -346,8 +346,7 @@ def latent_plot(data, labels, model, params, num_samples, prob_toggle=False, use
     if latent_dim == 3:
         fig = plt.figure(figsize=(10, 8))
         ax = fig.add_subplot(111, projection='3d')
-        scatter = ax.scatter(latent_representations[:, 0], latent_representations[:, 1], latent_representations[:, 2], 
-                                c=sampled_labels, cmap='tab10', alpha=0.6)
+        scatter = ax.scatter(latent_representations[:, 0], latent_representations[:, 1], latent_representations[:, 2], c=sampled_labels, cmap='tab10', alpha=0.6)
         ax.set_title('3D Latent Space Visualization')
         ax.set_xlabel('Latent Dimension 1')
         ax.set_ylabel('Latent Dimension 2')

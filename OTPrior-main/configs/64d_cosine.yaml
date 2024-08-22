@@ -2,21 +2,21 @@ data:
   source: "mnist"
 
 prior:
-  input_dim:    3
+  input_dim:    64
   hidden_dim:   250
-  output_dim:   3
+  output_dim:   64
   lr:           0.0001
-  epochs:       500
+  epochs:       250
   batch_size:   124
   batches:      40
 
 autoencoders:
   input_dim:    784
   hidden_dim:   256
-  latent_dim:   3
+  latent_dim:   64
   input_shape:  [28, 28, 1]
   lr:           0.001
-  epochs:       500
+  epochs:       10
   batch_size:   124
   batches:      40
   sae_prob_toggle:  False
@@ -24,7 +24,7 @@ autoencoders:
   convolutional:    True
 
 sinkhorn:
-  use_sinkhorn:   True
+  use_sinkhorn:   False
   max_iterations: 200
 
 scaling:
@@ -37,5 +37,5 @@ plotting:
 
 settings:
   params_path:  "OTPrior-main/saved_params"
-  config_name:  "3d_cosine"
+  config_name:  "64d_cosine"
   metric:       cosine

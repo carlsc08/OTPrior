@@ -70,7 +70,8 @@ class VAEModel(nn.Module):
 
     def __call__(self, x, key, prob_toggle: bool, test: bool = False):
         if prob_toggle:
-            return self.GaussianPosterior(x, key, test)
+            x_hat, mu, log_var = self.GaussianPosterior(x, key, test)
+            return x_hat, mu, log_var
         else:
             z = self.encoder(x, prob_toggle=False)
             x_hat = self.decoder(z)

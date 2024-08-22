@@ -176,6 +176,7 @@ plt.plot(losses)
 
 noise_vecs = sampling.noise_matrix(num_plot_samples, jr.PRNGKey(0), input_dim)
 prior_samples = jax.vmap(lambda x: prior_net.apply({'params': params}, x))(noise_vecs)
-plotters.kmeans_plot(prior_samples)
+if input_dim < 4:
+    plotters.kmeans_plot(prior_samples)
 plotters.tsne_kmeans_plot(prior_samples)
 plt.show()
