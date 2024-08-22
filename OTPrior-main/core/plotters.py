@@ -380,10 +380,11 @@ def mnist_img_plot(original, reconstructed, num_plots):
         plt.imshow(reconstructed[i].reshape(28, 28), cmap='gray')
         ax.axis('off')
 
+# find better way of scaling grid size
 def mnist_interp_euclidean(side_dim, decoder_model, decoder_params, digit_size = 28):
     figure = np.zeros((digit_size * side_dim, digit_size * side_dim))
-    grid_x = norm.ppf(np.linspace(-5, 5, side_dim))
-    grid_y = norm.ppf(np.linspace(-5, 5, side_dim))
+    grid_x = norm.ppf(np.linspace(-1, 1, side_dim))
+    grid_y = norm.ppf(np.linspace(-1, 1, side_dim))
 
     for i, yi in enumerate(grid_x):
         for j, xi in enumerate(grid_y):

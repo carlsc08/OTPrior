@@ -156,5 +156,5 @@ latent = jnp.concatenate(latent, axis=0)
 plotters.mnist_img_plot(test_data, reconstructed, 10)
 plotters.latent_plot(train_data, train_labels, vae_model, state.params['params'], num_plot_samples, prob_toggle, use_tsne=True)
 if latent_dim == 2:
-    plotters.mnist_interp_euclidean(50, vae_model.decoder, state.params['params']['decoder'])
+    plotters.mnist_interp_euclidean(100, vae_model.decoder, state.params['params']['decoder'])
 plt.show()
